@@ -16,6 +16,7 @@ import (
 type args struct {
 	Email        string `help:"Your Komoot email address"`
 	Password     string `help:"Your Komoot password"`
+	Recorded     bool   `help:"If specified, downlaod recorded tours instead of planned" default:"false"`
 	Filter       string `help:"Filter tours with name matching this pattern"`
 	Format       string `help:"The format to export as: gpx or fit" default:"gpx"`
 	To           string `help:"The path to export to"`
@@ -51,7 +52,12 @@ func main() {
 
 	log.Info("Komoot User ID:", userID)
 
-	tours, resp, err := client.Tours(userID, args.Filter)
+	tourType := "planned"
+	if args.Recorded == true {
+		tourType = "recorded"
+	}
+
+	tours, resp, err := client.Tours(userID, args.Filter, "tour_"+tourType)
 	log.CheckError(err)
 
 	if len(tours) == 0 {
@@ -59,7 +65,7 @@ func main() {
 		return
 	}
 
-	log.Info("Found", len(tours), "planned tours")
+	log.Info("Found", len(tours), " " + tourType + "tours")
 
 	allTours := []komoot.Tour{}
 
