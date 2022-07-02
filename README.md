@@ -1,6 +1,6 @@
 # export-komoot
 
-This is a proof-of-concept which allows you to export your planned tours from [Komoot](https://www.komoot.com).
+This is a proof-of-concept which allows you to export your tours from [Komoot](https://www.komoot.com).
 
 Note that this is a unofficial tool which uses private API's from Komoot and can break at any time…
 
@@ -30,6 +30,7 @@ Usage: export-komoot [--email EMAIL] [--password PASSWORD] [--filter FILTER] [--
 Options:
   --email EMAIL          Your Komoot email address
   --password PASSWORD    Your Komoot password
+  --recorded             If specified, downlaod recorded tours instead of planned [default: false]
   --filter FILTER        Filter tours with name matching this pattern
   --format FORMAT        The format to export as: gpx or fit [default: gpx]
   --to TO                The path to export to
